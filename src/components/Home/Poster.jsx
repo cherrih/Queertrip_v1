@@ -6,7 +6,11 @@ class Poster extends Component {
     this.state = {
 
     };
-    this.canvasRef = React.createRef();
+    this.rainbowRef = React.createRef();
+    this.textRef = React.createRef();
+    this.stickersRef = React.createRef();
+    this.logoRef = React.createRef();
+
   }
 
   componentDidMount() {
@@ -20,7 +24,10 @@ class Poster extends Component {
         <div className="poster-wrapper">
           <div className="poster-container">
             <div className="poster-canvas-container">
-              <canvas width="1080" height="1080" ref={this.canvasRef} />
+              <canvas id="poster-canvas-rainbow" width="1080" height="1080" ref={this.rainbowRef} />
+              <canvas id="poster-canvas-text" width="1080" height="1080" ref={this.textRef} />
+              <canvas id="poster-canvas-stickers" width="1080" height="1080" ref={this.stickersRef} />
+              <canvas id="poster-canvas-logo" width="1080" height="1080" ref={this.logoRef} />
             </div>
           </div>
         </div>
