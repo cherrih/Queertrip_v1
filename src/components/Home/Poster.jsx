@@ -9,10 +9,21 @@ class Poster extends Component {
     this.canvasRef = React.createRef();
   }
 
+  componentDidMount() {
+
+  }
+  // destination over for painting
+
   render() {
     return (
       <>
-        <canvas width="500" height="500" ref={this.canvasRef} />
+        <div className="poster-wrapper">
+          <div className="poster-container">
+            <div className="poster-canvas-container">
+              <canvas width="1080" height="1080" ref={this.canvasRef} />
+            </div>
+          </div>
+        </div>
       </>
     );
   }
