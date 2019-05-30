@@ -5,6 +5,7 @@
 
 body {
   font-family: 'Moderat-Light';
+  background-color: #fff;
 }
 
 .poster-wrapper {
@@ -18,24 +19,23 @@ body {
 .poster-container {
   display: table-cell;
   vertical-align: middle;
+  padding: 100px;
 }
 
 .poster-canvas-container {
   position: relative;
-  max-width: 1024px;
+  max-width: 1080px;
   min-width: 320px;
   margin: 0 auto;
-  padding: 100px;
 }
 
 #poster-canvas-rainbow {
   width: 100%;
   height: auto;
-  background-color: pink;
   z-index: 0;
 }
 
-#poster-canvas-text,  #poster-canvas-stickers, #poster-canvas-logo {
+#poster-canvas-text, #poster-canvas-stickers, #poster-canvas-logo {
   width: 100%;
   height: auto;
   position: absolute;
