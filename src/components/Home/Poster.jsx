@@ -11,74 +11,45 @@ class Poster extends Component {
     this.stickersRef = React.createRef();
     this.logoRef = React.createRef();
     this.placeText = this.placeText.bind(this);
+    // this.placeRotatedText = this.placeRotatedText.bind(this);
   }
 
   componentDidMount() {
     this.placeText();
   }
 
+  placeRotatedText(str, deg, w, h) {
+    const canvas = this.textRef.current;
+    const { width, height } = canvas;
+    const textCtx = canvas.getContext('2d');
+
+    textCtx.save();
+    textCtx.rotate(deg * Math.PI / 180);
+    textCtx.fillText(str, width / w, height / h);
+    textCtx.restore();
+  }
+
   placeText() {
     const canvas = this.textRef.current;
     const { width, height } = canvas;
+    const textCtx = canvas.getContext('2d');
+
+    const textColor = 'rgb(210, 185, 144)';
     const textFont = '20em Moderat-Light';
-    const textCtx = canvas.getContext("2d");
+
     textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
+    textCtx.fillStyle = textColor;
     textCtx.fillText('H', width / 20, height / 4);
-    textCtx.save();
-    textCtx.rotate(90 * Math.PI / 180);
-    textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
-    textCtx.fillText('a', width / 10, -height / 3.5);
-    textCtx.restore();
-    textCtx.save();
-    textCtx.rotate(25 * Math.PI / 180);
-    textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
-    textCtx.fillText('p', width / 2, -height / 12);
-    textCtx.restore();
-    textCtx.save();
-    textCtx.rotate(25 * Math.PI / 180);
-    textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
-    textCtx.fillText('p', width / 1.8, height / 8);
-    textCtx.restore();
-    textCtx.save();
-    textCtx.rotate(-20 * Math.PI / 180);
-    textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
-    textCtx.fillText('y', width / 1.9, height / 1.62);
-    textCtx.restore();
-    textCtx.save();
-    textCtx.rotate(2 * Math.PI / 180);
-    textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
-    textCtx.fillText('p', width / 12, height / 2.25);
-    textCtx.restore();
-    textCtx.save();
-    textCtx.rotate(35 * Math.PI / 180);
-    textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
-    textCtx.fillText('r', width / 2.2, height / 3.8);
-    textCtx.restore();
-    textCtx.save();
-    textCtx.rotate(2 * Math.PI / 180);
-    textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
-    textCtx.fillText('i', width / 6, height / 1.4);
-    textCtx.restore();
-    textCtx.save();
-    textCtx.rotate(-30 * Math.PI / 180);
-    textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
-    textCtx.fillText('d', -width / 10, height / 1.25);
-    textCtx.restore();
-    textCtx.save();
-    textCtx.rotate(-30 * Math.PI / 180);
-    textCtx.font = textFont;
-    textCtx.fillStyle = 'rgb(210, 185, 144)';
-    textCtx.fillText('e', width / 10, height / 1.2);
-    textCtx.restore();
+
+    this.placeRotatedText('a', 90, 10, -3.5);
+    this.placeRotatedText('p', 25, 2, -12);
+    this.placeRotatedText('p', 25, 1.8, 8);
+    this.placeRotatedText('y', -20, 1.9, 1.62);
+    this.placeRotatedText('p', 2, 12, 2.25);
+    this.placeRotatedText('r', 35, 2.2, 3.8);
+    this.placeRotatedText('i', 2, 6, 1.4);
+    this.placeRotatedText('d', -30, -10, 1.25);
+    this.placeRotatedText('e', -30, 10, 1.2);
   }
   // destination over for painting
 
