@@ -35,21 +35,21 @@ class Poster extends Component {
     const textCtx = canvas.getContext('2d');
 
     const textColor = 'rgb(210, 185, 144)';
-    const textFont = '20em Moderat-Light';
+    const textFont = '25em Moderat-Light';
 
     textCtx.font = textFont;
     textCtx.fillStyle = textColor;
-    textCtx.fillText('H', width / 20, height / 4);
+    textCtx.fillText('H', width / 20, height / 2.9);
 
-    this.placeRotatedText('a', 90, 10, -3.5);
-    this.placeRotatedText('p', 25, 2, -12);
-    this.placeRotatedText('p', 25, 1.8, 8);
-    this.placeRotatedText('y', -20, 1.9, 1.62);
-    this.placeRotatedText('p', 2, 12, 2.25);
-    this.placeRotatedText('r', 35, 2.2, 3.8);
-    this.placeRotatedText('i', 2, 6, 1.4);
-    this.placeRotatedText('d', -30, -10, 1.25);
-    this.placeRotatedText('e', -30, 10, 1.2);
+    this.placeRotatedText('a', 90, 7, -3);
+    this.placeRotatedText('p', 25, 1.7, -12);
+    this.placeRotatedText('p', 25, 1.53, 7);
+    this.placeRotatedText('y', -20, 1.65, 1.4);
+    this.placeRotatedText('p', 2, 12, 1.68);
+    this.placeRotatedText('r', 35, 1.75, 2.8);
+    this.placeRotatedText('i', 2, 5, 1.115);
+    this.placeRotatedText('d', -30, -8, 0.98);
+    this.placeRotatedText('e', -30, 9, 0.94);
   }
   // destination over for painting
 
