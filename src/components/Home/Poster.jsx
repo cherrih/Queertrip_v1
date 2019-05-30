@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import Poster from './Home/Poster.jsx';
 
-class App extends Component {
+class Poster extends Component {
   constructor(props) {
     super(props);
   }
   render() {
     return(
-      <Poster />
+      <div>POSTER</div>
     )
   }
 }
 
-export default App;
+export default Poster;
