@@ -10,8 +10,10 @@ class Poster extends Component {
     this.textRef = React.createRef();
     this.stickersRef = React.createRef();
     this.logoRef = React.createRef();
+
     this.placeText = this.placeText.bind(this);
     this.onColorClick = this.onColorClick.bind(this);
+    this.resetCanvas = this.resetCanvas.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +32,16 @@ class Poster extends Component {
     this.setState({
       colors: newColors,
     });
+  }
+
+  resetCanvas() {
+    const stickersCanvas = this.stickersRef.current;
+    const stickersCtx = stickersCanvas.getContext('2d');
+    stickersCtx.clearRect(0, 0, stickersCanvas.width, stickersCanvas.height);
+
+    const rainbowCanvas = this.rainbowRef.current;
+    const rainbowCtx = rainbowCanvas.getContext('2d');
+    rainbowCtx.clearRect(0, 0, rainbowCanvas.width, rainbowCanvas.height);
   }
 
   placeText() {
@@ -108,7 +120,7 @@ class Poster extends Component {
           </div>
         </div>
         <div className="poster-controls-share-container">
-          <button type="button" className="rounded-button">Reset</button>
+          <button type="button" className="rounded-button" onClick={this.resetCanvas}>Reset</button>
           <button type="button" className="rounded-button">Share your pride</button>
         </div>
       </>
