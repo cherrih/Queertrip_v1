@@ -91,9 +91,15 @@ a {
   cursor: pointer;
 }
 
+.poster-logo img {
+  position: absolute;
+  left: 46%;
+  top: 70%;
+}
+
 .poster-wrapper {
   display: table;
-  padding: 0;
+  padding-top: 50px;
   width: 100%;
   height: 100%;
 }

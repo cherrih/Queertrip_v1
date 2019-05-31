@@ -88,7 +88,7 @@ class Poster extends Component {
               <div id="#fff" style={{ backgroundColor: '#fff' }} onClick={this.onColorClick} />
             </div>
           </div>
-          <div>
+          <div className="poster-logo">
             <img src="../../../public/images/logo.png" alt="Queertrip logo" />
           </div>
           <div className="poster-controls-stickers">
