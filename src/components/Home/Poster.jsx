@@ -59,9 +59,10 @@ class Poster extends Component {
         <div className="poster-controls-container">
           <div className="poster-controls-colors">
             <div>Colors</div>
-            <div>
-
-            </div>
+            <div></div>
+          </div>
+          <div>
+            <img src="../../../public/images/logo.png" alt="Queertrip logo" />
           </div>
           <div className="poster-controls-stickers">
             <div>Stickers</div>
