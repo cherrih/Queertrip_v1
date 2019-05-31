@@ -141,15 +141,18 @@ a {
 /* ---- CITIES ---- */
 .cities-container {
   background-color: #FBFBFB;
-  text-align: center;
 }
 .cities-sign-up {
   padding: 40px;
   font-size: 1.2em;
   line-height: 1.2;
+  text-align: center;
 }
 .cities-sign-up-button {
   margin-top: 20px;
   height: 100%;
   padding: 12px 60px;
+}
+.cities-coming-soon-container {
+
 }
