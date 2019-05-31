@@ -4,7 +4,7 @@ import Poster from './Poster.jsx';
 
 const Home = (props) => {
   return (
-    <div>
+    <div className="home-container">
       <Header />
       <Poster />
     </div>

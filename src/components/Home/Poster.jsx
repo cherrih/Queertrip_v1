@@ -56,6 +56,18 @@ class Poster extends Component {
   render() {
     return (
       <>
+        <div className="poster-controls-container">
+          <div className="poster-controls-colors">
+            <div>Colors</div>
+            <div>
+
+            </div>
+          </div>
+          <div className="poster-controls-stickers">
+            <div>Stickers</div>
+            <div></div>
+          </div>
+        </div>
         <div className="poster-wrapper">
           <div className="poster-container">
             <div className="poster-canvas-container">
@@ -65,6 +77,10 @@ class Poster extends Component {
               <canvas id="poster-canvas-logo" width="1080" height="1080" ref={this.logoRef} />
             </div>
           </div>
+        </div>
+        <div className="poster-controls-share-container">
+          <button type="button" className="rounded-button">Reset</button>
+          <button type="button" className="rounded-button">Share your pride</button>
         </div>
       </>
     );
