@@ -152,7 +152,7 @@ class Poster extends Component {
   render() {
     const { isDragging } = this.state;
     const logoVisibility = isDragging ? 'hidden' : 'visible';
-    console.log(isDragging)
+    const url = 'https://queertriptheworld.s3.amazonaws.com/';
     return (
       <>
         <div className="poster-controls-container">
@@ -174,8 +174,8 @@ class Poster extends Component {
           </div>
           <div className="poster-logo-container">
             <div className="poster-drag" style={{ visibility: logoVisibility }}>Drag me</div>
-            <img className="poster-path" src="/public/images/path.png" alt="" style={{ visibility: logoVisibility }} />
-            <img className="poster-logo" src="/public/images/logo.png" alt="" draggable="true" onDragStart={this.toggleDragVisibility} onDragEnd={this.toggleDragVisibility} />
+            <img className="poster-path" src={`${url}path.png`} alt="" style={{ visibility: logoVisibility }} />
+            <img className="poster-logo" src={`${url}logo.png`} alt="" draggable="true" onDragStart={this.toggleDragVisibility} onDragEnd={this.toggleDragVisibility} />
           </div>
           <div className="poster-controls-stickers">
             <div>Stickers</div>
