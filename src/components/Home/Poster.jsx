@@ -88,12 +88,13 @@ class Poster extends Component {
               <div id="#fff" style={{ backgroundColor: '#fff' }} onClick={this.onColorClick} />
             </div>
           </div>
-          <div className="poster-logo">
-            <img src="../../../public/images/logo.png" alt="Queertrip logo" />
+          <div className="poster-logo-container">
+            <div className="poster-drag">Drag me</div>
+            <img className="poster-path" src="../../../public/images/path.png" alt="path" />
+            <img className="poster-logo" src="../../../public/images/logo.png" alt="Queertrip logo" />
           </div>
           <div className="poster-controls-stickers">
             <div>Stickers</div>
-            <div />
           </div>
         </div>
         <div className="poster-wrapper">

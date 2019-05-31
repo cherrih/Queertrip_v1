@@ -91,10 +91,22 @@ a {
   cursor: pointer;
 }
 
-.poster-logo img {
+.poster-logo-container img {
   position: absolute;
   left: 46%;
+}
+
+.poster-path {
+  top: 16%;
+}
+.poster-logo {
   top: 70%;
+}
+.poster-drag {
+  position: absolute;
+  left: 50%;
+  top: 11%;
+  transform: rotate(34deg);
 }
 
 .poster-wrapper {
