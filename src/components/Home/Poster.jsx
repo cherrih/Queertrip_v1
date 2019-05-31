@@ -102,8 +102,8 @@ class Poster extends Component {
           </div>
           <div className="poster-logo-container">
             <div className="poster-drag">Drag me</div>
-            <img className="poster-path" src="/images/path.png" alt="" />
-            <img className="poster-logo" src="/images/logo.png" alt="" />
+            <img className="poster-path" src="/public/images/path.png" alt="" />
+            <img className="poster-logo" src="/public/images/logo.png" alt="" />
           </div>
           <div className="poster-controls-stickers">
             <div>Stickers</div>
