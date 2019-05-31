@@ -11,7 +11,6 @@ class Poster extends Component {
     this.stickersRef = React.createRef();
     this.logoRef = React.createRef();
     this.placeText = this.placeText.bind(this);
-    // this.placeRotatedText = this.placeRotatedText.bind(this);
   }
 
   componentDidMount() {

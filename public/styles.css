@@ -2,9 +2,13 @@
   font-family: Moderat-Light;
   src: url(./fonts/Moderat-Light.otf);
 }
+@font-face {
+  font-family: Moderat-Regular;
+  src: url(./fonts/Moderat-Regular.woff);
+}
 
 body {
-  font-family: 'Moderat-Light';
+  font-family: 'Moderat-Regular';
   background-color: #fff;
 }
 h3, h1 {
@@ -130,5 +134,22 @@ a {
   text-align: center;
 }
 .poster-controls-share-container button {
-  margin: 0 10px;
+  margin: 0 10px 40px;
+
+}
+
+/* ---- CITIES ---- */
+.cities-container {
+  background-color: #FBFBFB;
+  text-align: center;
+}
+.cities-sign-up {
+  padding: 40px;
+  font-size: 1.2em;
+  line-height: 1.2;
+}
+.cities-sign-up-button {
+  margin-top: 20px;
+  height: 100%;
+  padding: 12px 60px;
 }
