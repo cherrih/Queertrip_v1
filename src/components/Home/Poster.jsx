@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ShareModal from './ShareModal.jsx';
 
 class Poster extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class Poster extends Component {
       lastY: 0,
       isDragging: false,
       image: '',
+      isModal: false,
     };
     this.rainbowRef = React.createRef();
     this.textRef = React.createRef();
@@ -22,6 +24,7 @@ class Poster extends Component {
     this.onCanvasRainbowDragOver = this.onCanvasRainbowDragOver.bind(this);
     this.onCanvasMouseEnter = this.onCanvasMouseEnter.bind(this);
     this.saveImage = this.saveImage.bind(this);
+    this.toggleShareModal = this.toggleShareModal.bind(this);
   }
 
   componentDidMount() {
@@ -163,10 +166,18 @@ class Poster extends Component {
 
     const image = rainbowCanvas.toDataURL('image/png');
     this.setState({ image });
+    this.toggleShareModal();
+  }
+
+  toggleShareModal() {
+    const { isModal } = this.state;
+    this.setState({
+      isModal: !isModal,
+    });
   }
 
   render() {
-    const { isDragging, image } = this.state;
+    const { isDragging, image, isModal } = this.state;
     const logoVisibility = isDragging ? 'hidden' : 'visible';
     const url = 'https://queertriptheworld.s3.amazonaws.com/';
     return (
@@ -210,8 +221,8 @@ class Poster extends Component {
         <div className="poster-controls-share-container">
           <button type="button" className="rounded-button" onClick={this.resetCanvas}>Reset</button>
           <button type="button" className="rounded-button" onClick={this.saveImage}>Share your pride</button>
-          <img src={image} alt="" />
         </div>
+        {isModal && <ShareModal close={this.toggleShareModal} image={image} />}
       </>
     );
   }
