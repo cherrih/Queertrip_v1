@@ -5,6 +5,9 @@ class Poster extends Component {
     super(props);
     this.state = {
       colors: ['rgb(15, 61, 163)', 'rgb(214, 42, 25)', 'rgb(250, 112, 21)', 'rgb(250, 190, 72)', 'rgb(47, 200, 120)'],
+      isDrawing: true,
+      lastX: 0,
+      lastY: 0,
     };
     this.rainbowRef = React.createRef();
     this.textRef = React.createRef();
@@ -14,6 +17,10 @@ class Poster extends Component {
     this.placeText = this.placeText.bind(this);
     this.onColorClick = this.onColorClick.bind(this);
     this.resetCanvas = this.resetCanvas.bind(this);
+    this.onDragLogoStart = this.onDragLogoStart.bind(this);
+    this.onCanvasRainbowDragOver = this.onCanvasRainbowDragOver.bind(this);
+    this.onCanvasMouseEnter = this.onCanvasMouseEnter.bind(this);
+    this.updateCursorPosition = this.updateCursorPosition.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +39,69 @@ class Poster extends Component {
     this.setState({
       colors: newColors,
     });
+  }
+
+  onDragLogoStart(e) {
+    this.setState({
+      isDrawing: true,
+    });
+  }
+
+  onCanvasMouseEnter(e) {
+    console.log('ENTER');
+    const canvas = this.rainbowRef.current;
+    const mousePosition = this.updateCursorPosition(canvas, e);
+    this.setState({
+      lastX: mousePosition[0],
+      lastY: mousePosition[1],
+    });
+  }
+
+  onCanvasRainbowDragOver(e) {
+    console.log('drawing')
+    const { lastX, lastY, isDrawing } = this.state;
+    if (!isDrawing) return;
+    const canvas = this.rainbowRef.current;
+    const context = canvas.getContext('2d');
+    const mousePosition = this.updateCursorPosition(canvas, e);
+    context.beginPath();
+    const gradient = this.getGradient(context);
+    context.strokeStyle = gradient;
+    context.lineWidth = 200;
+    context.lineJoin = 'bevel';
+    context.lineCap = 'round';
+    context.moveTo(lastX, lastY);
+    context.lineTo(mousePosition[0], mousePosition[1]);
+    context.stroke();
+    context.closePath();
+    this.setState({
+      lastX: mousePosition[0],
+      lastY: mousePosition[1],
+    });
+  }
+
+  getGradient(context) {
+    const { colors, lastX, lastY } = this.state;
+    const gradient = context.createLinearGradient(lastX - 100, lastY - 100, lastX + 100, lastY + 100);
+    let j = 0;
+    let coord = 0;
+    for (let i = 0; i < 5; i += 1) {
+      if (j > colors.length - 1) j = 0;
+      gradient.addColorStop(coord, colors[j]);
+      coord += 0.2;
+      gradient.addColorStop(coord, colors[j]);
+      j += 1;
+    }
+    return gradient;
+  }
+
+  updateCursorPosition(canvas, event) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (event.clientX - rect.left) * scaleX;
+    const y = (event.clientY - rect.top) * scaleY;
+    return [x, y];
   }
 
   resetCanvas() {
@@ -103,7 +173,7 @@ class Poster extends Component {
           <div className="poster-logo-container">
             <div className="poster-drag">Drag me</div>
             <img className="poster-path" src="/public/images/path.png" alt="" />
-            <img className="poster-logo" src="/public/images/logo.png" alt="" />
+            <img className="poster-logo" src="/public/images/logo.png" alt="" draggable="true" onDrag={this.onDragLogoStart} />
           </div>
           <div className="poster-controls-stickers">
             <div>Stickers</div>
@@ -112,7 +182,7 @@ class Poster extends Component {
         <div className="poster-wrapper">
           <div className="poster-container">
             <div className="poster-canvas-container">
-              <canvas id="poster-canvas-rainbow" width="1080" height="1080" ref={this.rainbowRef} />
+              <canvas id="poster-canvas-rainbow" width="1080" height="1080" ref={this.rainbowRef} onMouseMove={this.onCanvasRainbowDragOver} onMouseEnter={this.onCanvasMouseEnter} />
               <canvas id="poster-canvas-text" width="1080" height="1080" ref={this.textRef} />
               <canvas id="poster-canvas-stickers" width="1080" height="1080" ref={this.stickersRef} />
               <canvas id="poster-canvas-logo" width="1080" height="1080" ref={this.logoRef} />
