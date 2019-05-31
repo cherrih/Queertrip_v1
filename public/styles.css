@@ -10,6 +10,7 @@
 body {
   font-family: 'Moderat-Regular';
   background-color: #fff;
+  margin: 0;
 }
 h3, h1 {
   margin: 0;
@@ -28,9 +29,6 @@ a {
 }
 
 /* ----- HOME ----- */
-.home-container {
-  padding: 20px;
-}
 .rounded-button {
   height: 40px;
   padding: 10px 20px;
@@ -39,8 +37,11 @@ a {
 }
 
 /* ----- HEADER ------- */
-
 .header-container {
+  padding: 20px
+}
+
+.header-buttons-container {
   display: flex;
   text-align: center;
   width: 100%;
@@ -76,12 +77,18 @@ a {
   display: flex;
   justify-content: space-between;
   position: relative;
+  padding: 0 40px;
 }
-.poster-controls-stickers {
-  padding-right: 20px;
-}
-.poster-controls-colors {
-  padding-left: 20px;
+
+.poster-color-wheels div {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 20px;
+  margin-right: 10px;
+  border: 0.5px rgb(210, 185, 144)solid;
+  cursor: pointer;
 }
 
 .poster-wrapper {

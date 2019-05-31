@@ -2,8 +2,8 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <>
-      <div className="header-container">
+    <div className="header-container">
+      <div className="header-buttons-container">
         <button type="button" className="header-who rounded-button">Who?</button>
         <div>
           <h1>Queertrip</h1>
@@ -23,7 +23,7 @@ const Header = () => {
         </div>
       </nav>
       <div className="header-line" />
-    </>
+    </div>
   );
 };
 

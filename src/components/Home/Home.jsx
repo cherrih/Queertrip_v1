@@ -5,7 +5,7 @@ import Cities from './Cities.jsx';
 
 const Home = (props) => {
   return (
-    <div className="home-container">
+    <div>
       <Header />
       <Poster />
       <Cities />

@@ -4,28 +4,33 @@ class Poster extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      colors: [],
     };
     this.rainbowRef = React.createRef();
     this.textRef = React.createRef();
     this.stickersRef = React.createRef();
     this.logoRef = React.createRef();
     this.placeText = this.placeText.bind(this);
+    this.onColorClick = this.onColorClick.bind(this);
   }
 
   componentDidMount() {
     this.placeText();
   }
 
-  placeRotatedText(str, deg, w, h) {
-    const canvas = this.textRef.current;
-    const { width, height } = canvas;
-    const textCtx = canvas.getContext('2d');
-
-    textCtx.save();
-    textCtx.rotate(deg * Math.PI / 180);
-    textCtx.fillText(str, width / w, height / h);
-    textCtx.restore();
+  onColorClick(e) {
+    const { colors } = this.state;
+    const color = e.target.id;
+    let newColors = [];
+    if (colors.length < 5) {
+      newColors = colors.concat(color);
+    } else {
+      colors.shift();
+      newColors = colors.concat(color);
+    }
+    this.setState({
+      colors: newColors,
+    });
   }
 
   placeText() {
@@ -50,7 +55,19 @@ class Poster extends Component {
     this.placeRotatedText('d', -30, -8, 0.98);
     this.placeRotatedText('e', -30, 9, 0.94);
   }
+
   // destination over for painting
+
+  placeRotatedText(str, deg, w, h) {
+    const canvas = this.textRef.current;
+    const { width, height } = canvas;
+    const textCtx = canvas.getContext('2d');
+
+    textCtx.save();
+    textCtx.rotate(deg * Math.PI / 180);
+    textCtx.fillText(str, width / w, height / h);
+    textCtx.restore();
+  }
 
   render() {
     return (
@@ -58,7 +75,19 @@ class Poster extends Component {
         <div className="poster-controls-container">
           <div className="poster-controls-colors">
             <div>Colors</div>
-            <div></div>
+            <div className="poster-color-wheels">
+              <div id="#000" style={{backgroundColor: '#000'}} onClick={this.onColorClick} />
+              <div id="rgb(132, 54, 7)" style={{backgroundColor: 'rgb(132, 54, 7)'}} onClick={this.onColorClick} />
+              <div id="rgb(214, 42, 25)" style={{backgroundColor: 'rgb(214, 42, 25)'}} onClick={this.onColorClick} />
+              <div id="rgb(250, 112, 21)" style={{backgroundColor: 'rgb(250, 112, 21)'}} onClick={this.onColorClick} />
+              <div id="rgb(250, 190, 72)" style={{backgroundColor: 'rgb(250, 190, 72)'}} onClick={this.onColorClick} />
+              <div id="rgb(47, 200, 120)" style={{backgroundColor: 'rgb(47, 200, 120)'}} onClick={this.onColorClick} />
+              <div id="rgb(15, 61, 163)" style={{backgroundColor: 'rgb(15, 61, 163)'}} onClick={this.onColorClick} />
+              <div id="rgb(62, 61, 163)" style={{backgroundColor: 'rgb(62, 61, 163)'}} onClick={this.onColorClick} />              
+              <div id="rgb(7, 177, 224)" style={{backgroundColor: 'rgb(7, 177, 224)'}} onClick={this.onColorClick} />              
+              <div id="rgb(210, 67, 175)" style={{backgroundColor: 'rgb(210, 67, 175)'}} onClick={this.onColorClick} />
+              <div id="#fff" style={{backgroundColor: '#fff'}} onClick={this.onColorClick} />
+            </div>
           </div>
           <div>
             <img src="../../../public/images/logo.png" alt="Queertrip logo" />
