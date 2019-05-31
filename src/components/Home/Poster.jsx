@@ -150,7 +150,18 @@ class Poster extends Component {
   }
 
   saveImage() {
-    const image = this.rainbowRef.current.toDataURL('image/png');
+    const rainbowCanvas = this.rainbowRef.current;
+    const rainbowCtx = rainbowCanvas.getContext('2d');
+
+    const textCanvas = this.textRef.current;
+    const stickersCanvas = this.stickersRef.current;
+    const logoCanvas = this.logoRef.current;
+
+    rainbowCtx.drawImage(textCanvas, 0, 0);
+    rainbowCtx.drawImage(stickersCanvas, 0, 0);
+    rainbowCtx.drawImage(logoCanvas, 0, 0);
+
+    const image = rainbowCanvas.toDataURL('image/png');
     this.setState({ image });
   }
 
