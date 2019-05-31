@@ -8,6 +8,7 @@ class Poster extends Component {
       lastX: 0,
       lastY: 0,
       isDragging: false,
+      image: '',
     };
     this.rainbowRef = React.createRef();
     this.textRef = React.createRef();
@@ -20,6 +21,7 @@ class Poster extends Component {
     this.toggleDragVisibility = this.toggleDragVisibility.bind(this);
     this.onCanvasRainbowDragOver = this.onCanvasRainbowDragOver.bind(this);
     this.onCanvasMouseEnter = this.onCanvasMouseEnter.bind(this);
+    this.saveImage = this.saveImage.bind(this);
   }
 
   componentDidMount() {
@@ -136,8 +138,6 @@ class Poster extends Component {
     this.placeRotatedText('e', -30, 9, 0.94);
   }
 
-  // destination over for painting
-
   placeRotatedText(str, deg, w, h) {
     const canvas = this.textRef.current;
     const { width, height } = canvas;
@@ -149,8 +149,13 @@ class Poster extends Component {
     textCtx.restore();
   }
 
+  saveImage() {
+    const image = this.rainbowRef.current.toDataURL('image/png');
+    this.setState({ image });
+  }
+
   render() {
-    const { isDragging } = this.state;
+    const { isDragging, image } = this.state;
     const logoVisibility = isDragging ? 'hidden' : 'visible';
     const url = 'https://queertriptheworld.s3.amazonaws.com/';
     return (
@@ -193,7 +198,8 @@ class Poster extends Component {
         </div>
         <div className="poster-controls-share-container">
           <button type="button" className="rounded-button" onClick={this.resetCanvas}>Reset</button>
-          <button type="button" className="rounded-button">Share your pride</button>
+          <button type="button" className="rounded-button" onClick={this.saveImage}>Share your pride</button>
+          <img src={image} alt="" />
         </div>
       </>
     );
