@@ -8,16 +8,18 @@ const Cities = (props) => {
         <div>Sign up to be the first to know when it launches!</div>
         <button type="button" className="cities-sign-up-button rounded-button">Sign Up</button>
       </div>
-      <form>
-        <input type="text" name="name" placeholder="I'm traveling to..." />
-        <input type="submit" value="Search" />
-      </form>
+      <div className="cities-travel rounded-button">
+        <span className="cities-traveling">I'm traveling to...</span>
+        <span className="cities-search">Search</span>
+      </div>
       <div>
-        <div>
+        <div className="cities-coming-soon-title">
           Coming soon...
         </div>
         <div className="cities-coming-soon-container">
-
+          <div className="cities-grid-element" />
+          <div className="cities-grid-element" />
+          <div className="cities-grid-element" />
         </div>
       </div>
     </div>
