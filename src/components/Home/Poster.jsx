@@ -4,7 +4,7 @@ class Poster extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colors: [],
+      colors: ['rgb(15, 61, 163)', 'rgb(214, 42, 25)', 'rgb(250, 112, 21)', 'rgb(250, 190, 72)', 'rgb(47, 200, 120)'],
     };
     this.rainbowRef = React.createRef();
     this.textRef = React.createRef();
@@ -22,10 +22,9 @@ class Poster extends Component {
     const { colors } = this.state;
     const color = e.target.id;
     let newColors = [];
-    if (colors.length < 5) {
-      newColors = colors.concat(color);
+    if (colors.length >= 5) {
+      newColors = [...colors.slice(1), color];
     } else {
-      colors.shift();
       newColors = colors.concat(color);
     }
     this.setState({
@@ -76,17 +75,17 @@ class Poster extends Component {
           <div className="poster-controls-colors">
             <div>Colors</div>
             <div className="poster-color-wheels">
-              <div id="#000" style={{backgroundColor: '#000'}} onClick={this.onColorClick} />
-              <div id="rgb(132, 54, 7)" style={{backgroundColor: 'rgb(132, 54, 7)'}} onClick={this.onColorClick} />
-              <div id="rgb(214, 42, 25)" style={{backgroundColor: 'rgb(214, 42, 25)'}} onClick={this.onColorClick} />
-              <div id="rgb(250, 112, 21)" style={{backgroundColor: 'rgb(250, 112, 21)'}} onClick={this.onColorClick} />
-              <div id="rgb(250, 190, 72)" style={{backgroundColor: 'rgb(250, 190, 72)'}} onClick={this.onColorClick} />
-              <div id="rgb(47, 200, 120)" style={{backgroundColor: 'rgb(47, 200, 120)'}} onClick={this.onColorClick} />
-              <div id="rgb(15, 61, 163)" style={{backgroundColor: 'rgb(15, 61, 163)'}} onClick={this.onColorClick} />
-              <div id="rgb(62, 61, 163)" style={{backgroundColor: 'rgb(62, 61, 163)'}} onClick={this.onColorClick} />              
-              <div id="rgb(7, 177, 224)" style={{backgroundColor: 'rgb(7, 177, 224)'}} onClick={this.onColorClick} />              
-              <div id="rgb(210, 67, 175)" style={{backgroundColor: 'rgb(210, 67, 175)'}} onClick={this.onColorClick} />
-              <div id="#fff" style={{backgroundColor: '#fff'}} onClick={this.onColorClick} />
+              <div id="#000" style={{ backgroundColor: '#000' }} onClick={this.onColorClick} />
+              <div id="rgb(132, 54, 7)" style={{ backgroundColor: 'rgb(132, 54, 7)' }} onClick={this.onColorClick} />
+              <div id="rgb(214, 42, 25)" style={{ backgroundColor: 'rgb(214, 42, 25)' }} onClick={this.onColorClick} />
+              <div id="rgb(250, 112, 21)" style={{ backgroundColor: 'rgb(250, 112, 21)' }} onClick={this.onColorClick} />
+              <div id="rgb(250, 190, 72)" style={{ backgroundColor: 'rgb(250, 190, 72)' }} onClick={this.onColorClick} />
+              <div id="rgb(47, 200, 120)" style={{ backgroundColor: 'rgb(47, 200, 120)' }} onClick={this.onColorClick} />
+              <div id="rgb(15, 61, 163)" style={{ backgroundColor: 'rgb(15, 61, 163)' }} onClick={this.onColorClick} />
+              <div id="rgb(62, 61, 163)" style={{ backgroundColor: 'rgb(62, 61, 163)' }} onClick={this.onColorClick} />
+              <div id="rgb(7, 177, 224)" style={{ backgroundColor: 'rgb(7, 177, 224)' }} onClick={this.onColorClick} />
+              <div id="rgb(210, 67, 175)" style={{ backgroundColor: 'rgb(210, 67, 175)' }} onClick={this.onColorClick} />
+              <div id="#fff" style={{ backgroundColor: '#fff' }} onClick={this.onColorClick} />
             </div>
           </div>
           <div>
@@ -94,7 +93,7 @@ class Poster extends Component {
           </div>
           <div className="poster-controls-stickers">
             <div>Stickers</div>
-            <div></div>
+            <div />
           </div>
         </div>
         <div className="poster-wrapper">
