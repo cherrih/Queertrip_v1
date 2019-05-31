@@ -5,9 +5,9 @@ class Poster extends Component {
     super(props);
     this.state = {
       colors: ['rgb(15, 61, 163)', 'rgb(214, 42, 25)', 'rgb(250, 112, 21)', 'rgb(250, 190, 72)', 'rgb(47, 200, 120)'],
-      isDrawing: true,
       lastX: 0,
       lastY: 0,
+      isDragging: false,
     };
     this.rainbowRef = React.createRef();
     this.textRef = React.createRef();
@@ -17,10 +17,9 @@ class Poster extends Component {
     this.placeText = this.placeText.bind(this);
     this.onColorClick = this.onColorClick.bind(this);
     this.resetCanvas = this.resetCanvas.bind(this);
-    this.onDragLogoStart = this.onDragLogoStart.bind(this);
+    this.toggleDragVisibility = this.toggleDragVisibility.bind(this);
     this.onCanvasRainbowDragOver = this.onCanvasRainbowDragOver.bind(this);
     this.onCanvasMouseEnter = this.onCanvasMouseEnter.bind(this);
-    this.updateCursorPosition = this.updateCursorPosition.bind(this);
   }
 
   componentDidMount() {
@@ -41,14 +40,7 @@ class Poster extends Component {
     });
   }
 
-  onDragLogoStart(e) {
-    this.setState({
-      isDrawing: true,
-    });
-  }
-
   onCanvasMouseEnter(e) {
-    console.log('ENTER');
     const canvas = this.rainbowRef.current;
     const mousePosition = this.updateCursorPosition(canvas, e);
     this.setState({
@@ -58,9 +50,7 @@ class Poster extends Component {
   }
 
   onCanvasRainbowDragOver(e) {
-    console.log('drawing')
-    const { lastX, lastY, isDrawing } = this.state;
-    if (!isDrawing) return;
+    const { lastX, lastY } = this.state;
     const canvas = this.rainbowRef.current;
     const context = canvas.getContext('2d');
     const mousePosition = this.updateCursorPosition(canvas, e);
@@ -82,7 +72,9 @@ class Poster extends Component {
 
   getGradient(context) {
     const { colors, lastX, lastY } = this.state;
-    const gradient = context.createLinearGradient(lastX - 100, lastY - 100, lastX + 100, lastY + 100);
+    const gradient = context.createLinearGradient(
+      lastX - 100, lastY - 100, lastX + 100, lastY + 100,
+    );
     let j = 0;
     let coord = 0;
     for (let i = 0; i < 5; i += 1) {
@@ -93,6 +85,13 @@ class Poster extends Component {
       j += 1;
     }
     return gradient;
+  }
+
+  toggleDragVisibility() {
+    const { isDragging } = this.state;
+    this.setState({
+      isDragging: !isDragging,
+    });
   }
 
   updateCursorPosition(canvas, event) {
@@ -151,6 +150,9 @@ class Poster extends Component {
   }
 
   render() {
+    const { isDragging } = this.state;
+    const logoVisibility = isDragging ? 'hidden' : 'visible';
+    console.log(isDragging)
     return (
       <>
         <div className="poster-controls-container">
@@ -171,9 +173,9 @@ class Poster extends Component {
             </div>
           </div>
           <div className="poster-logo-container">
-            <div className="poster-drag">Drag me</div>
-            <img className="poster-path" src="/public/images/path.png" alt="" />
-            <img className="poster-logo" src="/public/images/logo.png" alt="" draggable="true" onDrag={this.onDragLogoStart} />
+            <div className="poster-drag" style={{ visibility: logoVisibility }}>Drag me</div>
+            <img className="poster-path" src="/public/images/path.png" alt="" style={{ visibility: logoVisibility }} />
+            <img className="poster-logo" src="/public/images/logo.png" alt="" draggable="true" onDragStart={this.toggleDragVisibility} onDragEnd={this.toggleDragVisibility} />
           </div>
           <div className="poster-controls-stickers">
             <div>Stickers</div>
@@ -182,7 +184,7 @@ class Poster extends Component {
         <div className="poster-wrapper">
           <div className="poster-container">
             <div className="poster-canvas-container">
-              <canvas id="poster-canvas-rainbow" width="1080" height="1080" ref={this.rainbowRef} onMouseMove={this.onCanvasRainbowDragOver} onMouseEnter={this.onCanvasMouseEnter} />
+              <canvas id="poster-canvas-rainbow" width="1080" height="1080" ref={this.rainbowRef} onDragOver={this.onCanvasRainbowDragOver} onDragEnter={this.onCanvasMouseEnter} />
               <canvas id="poster-canvas-text" width="1080" height="1080" ref={this.textRef} />
               <canvas id="poster-canvas-stickers" width="1080" height="1080" ref={this.stickersRef} />
               <canvas id="poster-canvas-logo" width="1080" height="1080" ref={this.logoRef} />
