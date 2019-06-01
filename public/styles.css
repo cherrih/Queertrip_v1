@@ -149,9 +149,10 @@ a {
   position: absolute;
   top: 0;
   left: 0;
+}
+#poster-canvas-text, #poster-canvas-logo {
   pointer-events: none;
 }
-
 #poster-canvas-text {
   z-index: 1;
 }

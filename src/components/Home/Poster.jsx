@@ -11,6 +11,8 @@ class Poster extends Component {
       isDragging: false,
       image: '',
       isModal: false,
+      isImagePlacer: false,
+      currImage: null,
     };
     this.rainbowRef = React.createRef();
     this.textRef = React.createRef();
@@ -25,6 +27,9 @@ class Poster extends Component {
     this.onCanvasMouseEnter = this.onCanvasMouseEnter.bind(this);
     this.saveImage = this.saveImage.bind(this);
     this.toggleShareModal = this.toggleShareModal.bind(this);
+    this.updateCursorPosition = this.updateCursorPosition.bind(this);
+    this.selectImage = this.selectImage.bind(this);
+    this.placeImage = this.placeImage.bind(this);
   }
 
   componentDidMount() {
@@ -92,6 +97,30 @@ class Poster extends Component {
     return gradient;
   }
 
+  selectImage(e) {
+    this.setState({
+      isImagePlacer: true,
+      currImage: e.target,
+    });
+  }
+
+  placeImage(e) {
+    const { currImage, isImagePlacer } = this.state;
+    if (isImagePlacer) {
+      const canvas = this.stickersRef.current;
+      const cursorPos = this.updateCursorPosition(canvas, e);
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(
+        currImage,
+        (cursorPos[0] - (0.5 * currImage.width)), (cursorPos[1] - (0.5 * currImage.height)),
+      );
+      this.setState({
+        isImagePlacer: false,
+        currImage: null,
+      });
+    }
+  }
+
   toggleDragVisibility() {
     const { isDragging } = this.state;
     this.setState({
@@ -99,12 +128,12 @@ class Poster extends Component {
     });
   }
 
-  updateCursorPosition(canvas, event) {
+  updateCursorPosition(canvas, e) {
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
-    const x = (event.clientX - rect.left) * scaleX;
-    const y = (event.clientY - rect.top) * scaleY;
+    const x = (e.clientX - rect.left) * scaleX;
+    const y = (e.clientY - rect.top) * scaleY;
     return [x, y];
   }
 
@@ -177,8 +206,11 @@ class Poster extends Component {
   }
 
   render() {
-    const { isDragging, image, isModal } = this.state;
+    const {
+      isDragging, image, isModal, isImagePlacer,
+    } = this.state;
     const logoVisibility = isDragging ? 'hidden' : 'visible';
+    const imageCanvasPointer = isImagePlacer ? 'auto' : 'none';
     const url = 'https://queertriptheworld.s3.amazonaws.com/';
     return (
       <>
@@ -207,9 +239,9 @@ class Poster extends Component {
           <div className="poster-controls-stickers">
             <div>Stickers</div>
             <div className="poster-stickers">
-              <img src="/public/images/frank.jpeg"/>
-              <img src="/public/images/frida.png"/>
-              <img src="/public/images/pride.png"/>
+              <img src="/public/images/frank.jpeg" onClick={this.selectImage} />
+              <img src="/public/images/frida.png" onClick={this.selectImage} />
+              <img src="/public/images/pride.png" onClick={this.selectImage} />
             </div>
           </div>
         </div>
@@ -218,7 +250,7 @@ class Poster extends Component {
             <div className="poster-canvas-container">
               <canvas id="poster-canvas-rainbow" width="1080" height="1080" ref={this.rainbowRef} onDragOver={this.onCanvasRainbowDragOver} onDragEnter={this.onCanvasMouseEnter} />
               <canvas id="poster-canvas-text" width="1080" height="1080" ref={this.textRef} />
-              <canvas id="poster-canvas-stickers" width="1080" height="1080" ref={this.stickersRef} />
+              <canvas id="poster-canvas-stickers" width="1080" height="1080" ref={this.stickersRef} onClick={this.placeImage} style={{ pointerEvents: imageCanvasPointer }} />
               <canvas id="poster-canvas-logo" width="1080" height="1080" ref={this.logoRef} />
             </div>
           </div>
