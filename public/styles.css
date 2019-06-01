@@ -107,9 +107,21 @@ a {
 .poster-path {
   top: 16%;
 }
+
 .poster-logo {
   top: 60%;
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
 }
+
+.poster-logo:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
 .poster-drag {
   position: absolute;
   left: 50%;
