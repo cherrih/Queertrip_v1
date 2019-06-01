@@ -112,7 +112,7 @@ class Poster extends Component {
       const ctx = canvas.getContext('2d');
       ctx.drawImage(
         currImage,
-        (cursorPos[0] - (0.5 * currImage.width)), (cursorPos[1] - (0.5 * currImage.height)),
+        (cursorPos[0] - 2 * currImage.width), (cursorPos[1] - 2 * currImage.height),
       );
       this.setState({
         isImagePlacer: false,
