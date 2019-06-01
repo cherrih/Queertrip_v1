@@ -206,6 +206,11 @@ class Poster extends Component {
           </div>
           <div className="poster-controls-stickers">
             <div>Stickers</div>
+            <div className="poster-stickers">
+              <img src="/public/images/frank.jpeg"/>
+              <img src="/public/images/frida.png"/>
+              <img src="/public/images/pride.png"/>
+            </div>
           </div>
         </div>
         <div className="poster-wrapper">

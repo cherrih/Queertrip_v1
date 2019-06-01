@@ -81,17 +81,24 @@ a {
   padding: 0 40px;
 }
 
-.poster-color-wheels div {
+.poster-color-wheels div, .poster-stickers img {
   height: 25px;
   width: 25px;
   border-radius: 50%;
   display: inline-block;
   margin-top: 20px;
-  margin-right: 10px;
   border: 0.5px rgb(210, 185, 144)solid;
   cursor: pointer;
 }
-
+.poster-color-wheels div {
+  margin-right: 10px;
+}
+.poster-stickers img {
+  margin-left: 10px;
+}
+.poster-controls-stickers {
+  text-align: right;
+}
 .poster-logo-container img {
   position: absolute;
   left: 46%;
