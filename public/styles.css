@@ -6,6 +6,10 @@
   font-family: Moderat-Regular;
   src: url(./fonts/Moderat-Regular.woff);
 }
+@font-face {
+  font-family: Moderat-Light-Italic;
+  src: url(./fonts/Moderat-Light-Italic.otf);
+}
 
 body {
   font-family: 'Moderat-Regular';
